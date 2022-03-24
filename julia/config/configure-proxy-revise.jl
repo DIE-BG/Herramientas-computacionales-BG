@@ -9,8 +9,8 @@
 # una serie de pasos para llevar a cabo esta configuración. En este ejemplo, el
 # usuario es `RRCP`, el cual debe ser apropiadamente reemplazado. 
 
-# 1. Navegar al directorio `C:\Users\RRCP\.julia\config`. Si el directorio
-#    `config` no existe, entonces se debe crear. 
+# 1. Navegar al directorio de usuario. Por ejemplo: `C:\Users\RRCP\.julia\config`. Si el
+#    directorio `config` no existe, entonces se debe crear. 
 # 2. Dentro del directorio `config`, crear un archivo llamado `startup.jl`. 
 # 3. Colocar dentro de dicho archivo la siguiente configuración. 
 # 4. Reiniciar Julia si estaba abierto para que surtan efecto los cambios. 

@@ -2,7 +2,7 @@
 
 # En este documento se exploran algunas de las características que diferencian a
 # Julia respecto de lenguajes como MATLAB, Python, o R. Julia permite ser
-# utilizado tan fácilmente como MATLAB, sin embargo, más allá de la sintaxis del
+# utilizado tan fácilmente como MATLAB. Sin embargo, más allá de la sintaxis del
 # lenguaje, existen diferencias técnicas muy importantes. En este cuaderno
 # exploramos algunas de estas características.  
 
@@ -392,7 +392,7 @@ Base.remove_linenums!(@macroexpand @my_time sleep(1))
 # las macros se ejecutan en "tiempo de análisis" del código fuente (*parsing*) y solo se llaman
 # una vez (antes de la compilación de la función).
 
-# Como vimos anteriormente, permiten definir lenguajes de propósito específico: 
+# La metaprogramación permite definir extender Julia para definir lenguajes de propósito específico: 
 # - [Turing](https://github.com/TuringLang/Turing.jl)
 # - [JuMP](https://github.com/jump-dev/JuMP.jl)
 
