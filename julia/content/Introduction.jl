@@ -8,7 +8,7 @@ using InteractiveUtils
 using PlutoUI
 
 # ╔═╡ 29d04192-3c68-4fd1-8305-4addcc2090d4
-PlutoUI.TableOfContents(title="Contenido", indent=true)
+PlutoUI.TableOfContents(title="Contenido", indent=true, aside=true)
 
 # ╔═╡ 9afaf420-aad0-11ec-34ce-779d0ef36e3e
 md"""
@@ -61,12 +61,14 @@ md"""
 ### A programming language to heal the planet together
 - [A programming language to heal the planet together: Julia | Alan Edelman | TEDxMIT](https://www.youtube.com/watch?v=qGW0GT1rCvs&t=13s) 
 
-$(PlutoUI.LocalResource("images/heal-the-planet.png"))
+$(PlutoUI.LocalResource("../../images/heal-the-planet.png"))
 """
 
 # ╔═╡ 78d73bc5-53cd-4cd1-9087-bb0590327d5f
 md"""
 ## Flujo de trabajo 
+
+Para utilizar Julia podemos utilizar alguno de estos flujos de trabajo: 
 - REPL
 - Visual Studio Code: 
   - Instalación de paquetes. 
@@ -76,6 +78,17 @@ md"""
   - Utilización de [Revise.jl](https://github.com/timholy/Revise.jl). 
 - Cuadernos Jupyter
 - Cuadernos Pluto (¡como este!)
+
+Dependiendo de la aplicación, se recomienda: 
+- REPL: para pruebas rápidas y para cargar Pluto. 
+- Visual Studio Code:
+  - Proyectos de investigación 
+  - Desarrollo de paquetes
+  - Para scripts de automatización
+- Cuadernos Jupyter: 
+  - Proyectos de investigación en los que se desee desarrollar el código y mostrar los resultados a la vez. 
+- Cuadernos Pluto: 
+  - Similar al anterior, pero cuando sea requerido utilizar interactividad. 
 """
 
 # ╔═╡ 033c2f3e-060c-4f01-b31d-67b29dacf7d8
