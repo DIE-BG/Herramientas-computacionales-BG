@@ -404,7 +404,7 @@ Base.remove_linenums!(@macroexpand @my_time sleep(1))
 # mismos $n$ números aleatorios: 
 
 macro generate_random_fn(n)
-    # Generar números aleatorios
+    ## Generar números aleatorios
     r = randn(n)
     quote
         function random_function()
