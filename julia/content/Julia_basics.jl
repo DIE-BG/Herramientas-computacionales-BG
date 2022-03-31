@@ -4,6 +4,16 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
 # ╔═╡ b9fc9306-267e-4be8-829e-04057d937806
 using PlutoUI 
 
@@ -20,11 +30,10 @@ md"""
 # ╔═╡ 0e0b4542-afaf-11ec-3a30-cdcfacda7f43
 md"""
 # Variables y tipos de datos
-"""
 
-# ╔═╡ ff81f163-114f-4fca-bbf2-a57b7446508d
-md"""
-## Tipos de datos básicos
+- En Julia, al igual que en todos los lenguajes, los datos son almacenados en memoria y accedidos a través de una referencia, denominada **variable**. 
+
+- Las variables pueden ser de diferentes tipos, de acuerdo con la representación interna de memoria de los datos.
 """
 
 # ╔═╡ 2987f00c-1574-4429-a89f-7009a095a895
@@ -45,6 +54,8 @@ typeof(a), typeof(b), typeof(s), typeof(f)
 # ╔═╡ 56c2e83f-1d4f-4259-877e-1edf6a305469
 md"""
 ## Colecciones
+
+Las colecciones permiten almacenar elementos del mismo tipo (o de diferente tipo) para realizar operaciones sobre conjuntos de datos. 
 """
 
 # ╔═╡ 165eee6f-a56b-47cf-8a25-6fc3053301c9
@@ -53,8 +64,21 @@ t = rand(10)
 # ╔═╡ 2f4527bb-3f25-4aa1-a8db-040157730608
 ϵ = randn(10)
 
+# ╔═╡ 1ac04f8e-cb74-4509-8e4f-7386573ff049
+md"""
+## Matrices (y arreglos de mayores dimensiones)
+Para crear una matriz de valores
+"""
+
 # ╔═╡ 720e0368-c3f7-4ff3-98a6-e8711b62a1fa
 u = rand(10,10)
+
+# ╔═╡ 0daf64ee-347e-4637-9410-755ca6526f60
+md"""
+## Vectores y tuplas
+- Los vectores pueden ser de cualquier tipo (incluso, de tipos mixtos).
+- Las tuplas son colecciones inmutables de elementos de cualquier tipo. 
+"""
 
 # ╔═╡ 8952fc5d-7529-41bc-9723-249895d35271
 my_names = ["Rodrigo", "Miguel", "Eva"]
@@ -65,6 +89,10 @@ my_tuple = ("Rodrigo", "Miguel", "Eva")
 # ╔═╡ 8b53b3de-4c67-4d92-a41a-345a196b9555
 md"""
 ## Tipos compuestos
+
+En Julia es común trabajar con tipos compuestos que representen la información con la que estamos trabajando. 
+
+Por ejemplo, si estamos trabajando un problema con una lista de personas para una fiesta, podríamos utilizar el siguiente **tipo compuesto**: 
 """
 
 # ╔═╡ 278e9ae3-4e3a-4b73-8a7c-39e56267380a
@@ -86,16 +114,32 @@ my_party = [
 # ╔═╡ 5a62a83c-9f18-42ed-b6a0-6f50b1afb6bf
 md"""
 # Sentencias condicionales y de iteración
+
+- Las sentencias condicionales nos sirven para cambiar el flujo de ejecución de un programa. 
+- Las sentencias de iteración permiten repetir los procedimientos u algoritmos ya sea con:
+  - un número determinado de veces (ciclo `for`) 
+  - un número indeterminado de veces (ciclo `while`).
+"""
+
+# ╔═╡ a31b479b-0f16-4892-89d1-231b410041dc
+md"""
+## Sentencias condicionales
+
+Revisemos las sentencias condicionales básicas con el bloque `if`:
 """
 
 # ╔═╡ ab8179cf-c923-4635-bff0-6138422b18fc
 c = 1
 
+# ╔═╡ e8c62834-614e-4b3a-b4df-cf42d79972ce
+# (Con PlutoUI podemos crear controles interactivos en nuestros cuadernos)
+# @bind c Slider(-5:5; show_value=true)
+
 # ╔═╡ 6b483608-c945-4cca-84eb-a966c45925b6
 if c > 1
-	@info "sí"
+	"sí"
 else
-	@info "no"
+	"no"
 end
 
 # ╔═╡ b833aff9-e049-426f-b629-1498d5665415
@@ -104,6 +148,14 @@ d = if c > 1
 	else
 		20
 	end
+
+# ╔═╡ ddff967b-4ded-4cc9-ad8d-7ba6ecf5b943
+md"""
+## Sentencias de iteración
+"""
+
+# ╔═╡ c20bc6d0-9d2d-4b01-a15f-77643fee97d1
+t
 
 # ╔═╡ b46638be-b4b1-4d12-a179-ff31974cfa0f
 begin
@@ -120,6 +172,160 @@ with_terminal() do
 		println("Having fun with $(person.name)")
 	end
 end
+
+# ╔═╡ 53d6470a-13be-4a59-819a-c668e6f9f3c2
+md"""
+# Funciones
+
+Para crear una función, podemos utilizar diferentes recetas: 
+"""
+
+# ╔═╡ 58f8f2f7-b0f5-4946-a18a-2066c9cd6c21
+simplefn(x) = 2x
+
+# ╔═╡ 0f59173e-1348-4b32-a4a5-2e15c9a01650
+simplefn(2)
+
+# ╔═╡ d5ff8cb9-55e8-4642-9079-b76dfd120dd9
+md"""
+Para definir una función más compleja, utilizamos el bloque `function`
+"""
+
+# ╔═╡ 45ae1da9-67c2-4140-b799-83b07934eb05
+function complex_fn(x)
+	2x
+end
+
+# ╔═╡ b6f550b2-f65d-4023-940b-d18e39fe8eaf
+md"""
+## Argumentos posicionales y nombrados
+Podemos crear funciones más complejas y configurables con **argumentos posicionales** y **argumentos nombrados**. 
+"""
+
+# ╔═╡ 2fb5901d-50c6-49f1-864c-05812826e7b3
+function my_function(a=1, b=a ,c...=ones(10)...; α=0.5, β=1-α, γ=one(a), kwargs...)
+
+    z1 = a*sum(c) + b
+    z2 = γ * (α + β)
+    @show kwargs
+
+    z = z1 + z2 
+    z # return es opcional
+end
+
+# ╔═╡ d3acb613-7737-46ce-b1fd-801adc2454b9
+md"""
+# *Multiple dispatch*
+
+Una de las características de Julia es la utilización del *multiple dispatch*, que se refiere a la capacidad del lenguaje de llamar a las funciones más adecuadas para los tipos con los que se invoca la función. 
+
+Debido a esta característica, muchas funciones tienen diferentes **métodos**. Veamos un ejemplo: 
+"""
+
+# ╔═╡ 25b0b4d3-cffb-4441-8627-513b9a080767
++
+
+# ╔═╡ 37cdd64d-a037-483f-9837-48e3d119e2aa
+sum
+
+# ╔═╡ 2ecb0e73-38e7-45a4-90a5-d2b31cf35481
+md"""
+## Métodos de una función
+"""
+
+# ╔═╡ 9dd6990c-d347-4013-8466-767e2c3b2624
+methods(sum)
+
+# ╔═╡ ce2b298b-f3f0-4c16-9763-dba6e6eff31e
+md"""
+## Comprobando el *multiple dispatch*
+"""
+
+# ╔═╡ ca7f901c-0b58-4efd-91b7-afd0b728093f
+sum([1,2,3,4,5])
+
+# ╔═╡ 3e72f5e4-e110-4b37-add9-1e4473b443d2
+@which sum([1,2,3,4,5])
+
+# ╔═╡ 62eb02ae-5d4a-4ef3-b6eb-5547274d214d
+sum((1,2,3,4,5))
+
+# ╔═╡ 03c11c89-5849-4e84-96d8-6b7f09223c4f
+@which sum((1,2,3,4,5))
+
+# ╔═╡ 416a74f4-78e8-4f9a-8df2-cef7262f9efc
+md"""
+## Utilidad del multiple dispatch 
+
+La charla de de Stefan Karpinksi llamada [The Unreasonable Effectiveness of Multiple Dispatch ](https://www.youtube.com/watch?v=kc9HwsxE1OY) explica por qué ha funcionado tan bien.
+  - **Es un sistema muy eficaz para extender el ecosistema**: una persona crea un tipo en un paquete, otra persona lo mejora y extiende en otro paquete.  
+    - Plots.jl -> StatsPlots.jl
+    - Random -> Distributions.jl
+  - Permite realizar **programación genérica**: esto permite generalizar más fácilmente y la componibilidad del lenguaje. 
+  - "*Vine por la velocidad, pero me quedo por el multiple dispatch*".
+"""
+
+# ╔═╡ 3b03b8fa-f162-4c00-88c4-02417c97276f
+md"""
+## Programación genérica
+"""
+
+# ╔═╡ 93731703-b604-4830-a1fb-70a1e44520c1
+begin
+	# Tipo abstracto para representar figuras geométricas
+	abstract type GeometricFigure end 
+	
+	struct Square <: GeometricFigure 
+		side::Float64
+	end
+	
+	struct Circle <: GeometricFigure 
+		radius::Float64
+	end
+	
+	# Métodos específicos para obtener el área y describir al objeto
+	area(s::Square) = s.side^2
+	area(c::Circle) = pi*c.radius^2
+	whatami(::Square) = "Square"
+	whatami(::Circle) = "Circle"
+	
+	# Método generales para mostrar el objeto
+	whatami(::GeometricFigure) = "GeometricFigure"
+	function Base.show(io::IO, g::GeometricFigure)
+		i = whatami(g)
+		myarea = area(g)
+		println(io, "¡Hola! Soy un $i y mi área es ", myarea)
+	end
+end
+
+# ╔═╡ 7968fa64-f493-4b68-a38a-347a96314efc
+sq1 = Square(1)
+
+# ╔═╡ ba4aee5e-d1c5-49d0-9f58-c404d33ef59a
+c1 = Circle(1)
+
+# ╔═╡ e5e9a3bc-96b1-493a-af53-c8043d79170b
+md"""
+## Extendiendo la funcionalidad
+
+Si otra persona crea otro paquete con más figuras, puede utilizar estas definiciones para extender la funcionalidad: 
+"""
+
+# ╔═╡ 672e06b7-9049-4959-86e1-215e7f7e8b4a
+begin
+	# Extendiendo un tipo nuevo
+	struct Triangle <: GeometricFigure 
+		base::Float64
+		height::Float64
+	end
+	
+	# Extendiendo la funcionalidad específica
+	area(t::Triangle) = t.base * t.height/ 2
+	# ¿ cómo podemos definir el método whatami para un triángulo?
+end
+
+# ╔═╡ 4482a144-4df3-4742-a089-179b362c1e99
+t1 = Triangle(2,3)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -326,7 +532,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═54a8887b-e9cb-4b7d-baec-f69b050a7220
 # ╠═ced1d3ee-370d-46f8-b625-468b4aa171bb
 # ╟─0e0b4542-afaf-11ec-3a30-cdcfacda7f43
-# ╟─ff81f163-114f-4fca-bbf2-a57b7446508d
 # ╠═2987f00c-1574-4429-a89f-7009a095a895
 # ╠═a0ac68a0-ad12-4821-a2f7-14cf37af262e
 # ╠═de552ebb-d04f-4185-8cc2-540088b7c55b
@@ -335,7 +540,9 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─56c2e83f-1d4f-4259-877e-1edf6a305469
 # ╠═165eee6f-a56b-47cf-8a25-6fc3053301c9
 # ╠═2f4527bb-3f25-4aa1-a8db-040157730608
+# ╟─1ac04f8e-cb74-4509-8e4f-7386573ff049
 # ╠═720e0368-c3f7-4ff3-98a6-e8711b62a1fa
+# ╟─0daf64ee-347e-4637-9410-755ca6526f60
 # ╠═8952fc5d-7529-41bc-9723-249895d35271
 # ╠═ab2b0667-0d25-46cc-95b9-ba5830ce73e1
 # ╟─8b53b3de-4c67-4d92-a41a-345a196b9555
@@ -343,10 +550,39 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═426405ba-27c2-4853-b7ae-33ebeb0f8d22
 # ╠═a929b78a-290a-4a87-9c0e-601faf554b53
 # ╟─5a62a83c-9f18-42ed-b6a0-6f50b1afb6bf
+# ╟─a31b479b-0f16-4892-89d1-231b410041dc
 # ╠═ab8179cf-c923-4635-bff0-6138422b18fc
+# ╠═e8c62834-614e-4b3a-b4df-cf42d79972ce
 # ╠═6b483608-c945-4cca-84eb-a966c45925b6
 # ╠═b833aff9-e049-426f-b629-1498d5665415
+# ╟─ddff967b-4ded-4cc9-ad8d-7ba6ecf5b943
+# ╠═c20bc6d0-9d2d-4b01-a15f-77643fee97d1
 # ╠═b46638be-b4b1-4d12-a179-ff31974cfa0f
 # ╠═b778dc21-524d-4f24-a683-47cabd6312d4
+# ╟─53d6470a-13be-4a59-819a-c668e6f9f3c2
+# ╠═58f8f2f7-b0f5-4946-a18a-2066c9cd6c21
+# ╠═0f59173e-1348-4b32-a4a5-2e15c9a01650
+# ╟─d5ff8cb9-55e8-4642-9079-b76dfd120dd9
+# ╠═45ae1da9-67c2-4140-b799-83b07934eb05
+# ╟─b6f550b2-f65d-4023-940b-d18e39fe8eaf
+# ╠═2fb5901d-50c6-49f1-864c-05812826e7b3
+# ╟─d3acb613-7737-46ce-b1fd-801adc2454b9
+# ╠═25b0b4d3-cffb-4441-8627-513b9a080767
+# ╠═37cdd64d-a037-483f-9837-48e3d119e2aa
+# ╟─2ecb0e73-38e7-45a4-90a5-d2b31cf35481
+# ╠═9dd6990c-d347-4013-8466-767e2c3b2624
+# ╟─ce2b298b-f3f0-4c16-9763-dba6e6eff31e
+# ╠═ca7f901c-0b58-4efd-91b7-afd0b728093f
+# ╠═3e72f5e4-e110-4b37-add9-1e4473b443d2
+# ╠═62eb02ae-5d4a-4ef3-b6eb-5547274d214d
+# ╠═03c11c89-5849-4e84-96d8-6b7f09223c4f
+# ╟─416a74f4-78e8-4f9a-8df2-cef7262f9efc
+# ╟─3b03b8fa-f162-4c00-88c4-02417c97276f
+# ╠═93731703-b604-4830-a1fb-70a1e44520c1
+# ╠═7968fa64-f493-4b68-a38a-347a96314efc
+# ╠═ba4aee5e-d1c5-49d0-9f58-c404d33ef59a
+# ╟─e5e9a3bc-96b1-493a-af53-c8043d79170b
+# ╠═672e06b7-9049-4959-86e1-215e7f7e8b4a
+# ╠═4482a144-4df3-4742-a089-179b362c1e99
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
