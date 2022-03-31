@@ -253,6 +253,12 @@ sum((1,2,3,4,5))
 # ╔═╡ 03c11c89-5849-4e84-96d8-6b7f09223c4f
 @which sum((1,2,3,4,5))
 
+# ╔═╡ bd7f83e0-15d2-41e3-9be7-2dad1aab8c8b
+sum(10)
+
+# ╔═╡ ed59c4b4-1359-414d-845b-94ea26e8a4b1
+@which sum(10)
+
 # ╔═╡ 416a74f4-78e8-4f9a-8df2-cef7262f9efc
 md"""
 ## Utilidad del multiple dispatch 
@@ -576,6 +582,8 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═3e72f5e4-e110-4b37-add9-1e4473b443d2
 # ╠═62eb02ae-5d4a-4ef3-b6eb-5547274d214d
 # ╠═03c11c89-5849-4e84-96d8-6b7f09223c4f
+# ╠═bd7f83e0-15d2-41e3-9be7-2dad1aab8c8b
+# ╠═ed59c4b4-1359-414d-845b-94ea26e8a4b1
 # ╟─416a74f4-78e8-4f9a-8df2-cef7262f9efc
 # ╟─3b03b8fa-f162-4c00-88c4-02417c97276f
 # ╠═93731703-b604-4830-a1fb-70a1e44520c1
