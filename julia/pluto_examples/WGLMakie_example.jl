@@ -17,7 +17,7 @@ begin
 end
 
 # ╔═╡ f415751a-5430-4766-b80c-1e0737031855
-scatter(1:10, color=1:10)
+scatter(rand(100), color=1:100)
 
 # ╔═╡ 9f407ec7-0c4c-493a-aeb6-c73323df1c53
 begin
