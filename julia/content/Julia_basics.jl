@@ -18,14 +18,7 @@ end
 using PlutoUI 
 
 # ╔═╡ 54a8887b-e9cb-4b7d-baec-f69b050a7220
-PlutoUI.TableOfContents(title = "📚 Contenido")
-
-# ╔═╡ ced1d3ee-370d-46f8-b625-468b4aa171bb
-md"""
-1. Variables y tipos de datos
-2. Sentencias condicionales y de iteración
-3. Funciones y Multiple Dispatch
-"""
+PlutoUI.TableOfContents(title="📚 Contenido", aside=false)
 
 # ╔═╡ 0e0b4542-afaf-11ec-3a30-cdcfacda7f43
 md"""
@@ -535,8 +528,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╠═b9fc9306-267e-4be8-829e-04057d937806
-# ╠═54a8887b-e9cb-4b7d-baec-f69b050a7220
-# ╠═ced1d3ee-370d-46f8-b625-468b4aa171bb
+# ╟─54a8887b-e9cb-4b7d-baec-f69b050a7220
 # ╟─0e0b4542-afaf-11ec-3a30-cdcfacda7f43
 # ╠═2987f00c-1574-4429-a89f-7009a095a895
 # ╠═a0ac68a0-ad12-4821-a2f7-14cf37af262e
