@@ -55,7 +55,7 @@ Las colecciones permiten almacenar elementos del mismo tipo (o de diferente tipo
 t = rand(10)
 
 # ╔═╡ 2f4527bb-3f25-4aa1-a8db-040157730608
-ϵ = randn(10)
+ϵ = randn(10) # Se generan datos aleatorios, con distribución normal(0,1)
 
 # ╔═╡ 1ac04f8e-cb74-4509-8e4f-7386573ff049
 md"""
@@ -76,8 +76,34 @@ md"""
 # ╔═╡ 8952fc5d-7529-41bc-9723-249895d35271
 my_names = ["Rodrigo", "Miguel", "Eva"]
 
+# ╔═╡ 4938ea83-da73-4f05-82a6-26252838dc2b
+my_names[1]
+
 # ╔═╡ ab2b0667-0d25-46cc-95b9-ba5830ce73e1
 my_tuple = ("Rodrigo", "Miguel", "Eva")
+
+# ╔═╡ 94afa92e-bb21-47cf-979a-cbca1323cdb0
+md"""
+## Rangos
+"""
+
+# ╔═╡ 3bdc3d06-3c18-48ee-916a-2df7b06ba58c
+1:10
+
+# ╔═╡ e90dfc17-c9c5-4d4a-8e27-8528d167d32e
+r = 0:0.1:10
+
+# ╔═╡ 8a34a637-577d-43fa-b6bc-18e2e24213e1
+Dump(r)
+
+# ╔═╡ 9c75d276-6186-4ac3-9754-80ac949f41b0
+[r...]
+
+# ╔═╡ d84faa8f-809a-40af-9ebe-89d7189f967a
+typeof(r)
+
+# ╔═╡ 893f2d2e-53f3-4182-a93d-f1f55d802e25
+r[1]
 
 # ╔═╡ 8b53b3de-4c67-4d92-a41a-345a196b9555
 md"""
@@ -96,6 +122,12 @@ end
 
 # ╔═╡ 426405ba-27c2-4853-b7ae-33ebeb0f8d22
 p1 = Person("José", 25)
+
+# ╔═╡ b5f1229b-ecf4-432f-8e90-b6ed0cef7b62
+p1.name
+
+# ╔═╡ 4b7b9ee4-9e83-4d37-b3ff-85454980cc12
+p1.age
 
 # ╔═╡ a929b78a-290a-4a87-9c0e-601faf554b53
 my_party = [
@@ -122,11 +154,11 @@ Revisemos las sentencias condicionales básicas con el bloque `if`:
 """
 
 # ╔═╡ ab8179cf-c923-4635-bff0-6138422b18fc
-c = 1
+#c = 1
 
 # ╔═╡ e8c62834-614e-4b3a-b4df-cf42d79972ce
 # (Con PlutoUI podemos crear controles interactivos en nuestros cuadernos)
-# @bind c Slider(-5:5; show_value=true)
+@bind c Slider(-5:5; show_value=true)
 
 # ╔═╡ 6b483608-c945-4cca-84eb-a966c45925b6
 if c > 1
@@ -137,6 +169,7 @@ end
 
 # ╔═╡ b833aff9-e049-426f-b629-1498d5665415
 d = if c > 1
+		### ...
 		10
 	else
 		20
@@ -150,13 +183,30 @@ md"""
 # ╔═╡ c20bc6d0-9d2d-4b01-a15f-77643fee97d1
 t
 
+# ╔═╡ 118229f5-61ca-43a6-93cb-e268bf6fd9f7
+sum(t)
+
+# ╔═╡ 6ae88f84-de7e-469c-9eb3-305976515f70
+T = eltype(t)
+
 # ╔═╡ b46638be-b4b1-4d12-a179-ff31974cfa0f
 begin
-	my_sum = zero(eltype(t))
+	my_sum = zero(T)
 	for x in t 
-		my_sum += x
+		my_sum += x # my_sum = my_sum + x
 	end
 	my_sum
+end
+
+# ╔═╡ d85e05b4-3623-4f87-9c0c-af98c0aa5e52
+begin
+	my_sum2 = zero(T)
+	i = 1
+	while i <= length(t)
+		global my_sum2 += t[i] # my_sum = my_sum + x[i]
+		global i += 1
+	end
+	my_sum2
 end
 
 # ╔═╡ b778dc21-524d-4f24-a683-47cabd6312d4
@@ -186,8 +236,20 @@ Para definir una función más compleja, utilizamos el bloque `function`
 
 # ╔═╡ 45ae1da9-67c2-4140-b799-83b07934eb05
 function complex_fn(x)
-	2x
+	z = 2x
+	α = 0.5
+	y = z + 2^α
+	y
 end
+
+# ╔═╡ e00fe757-5926-4283-978b-9a17d5387fb5
+begin
+	ĥ = 2
+	yₜ = ĥ
+end
+
+# ╔═╡ c6b7baf2-f61f-4d60-8f1f-d204a8fb4a58
+complex_fn(2)
 
 # ╔═╡ b6f550b2-f65d-4023-940b-d18e39fe8eaf
 md"""
@@ -206,6 +268,15 @@ function my_function(a=1, b=a ,c...=ones(10)...; α=0.5, β=1-α, γ=one(a), kwa
     z # return es opcional
 end
 
+# ╔═╡ 2358555d-1cd1-46dc-b039-f77528c2dd5f
+my_function()
+
+# ╔═╡ 8b123de2-2cd7-4652-848c-9bd895d29566
+my_function(2,3,3,4,5,6)
+
+# ╔═╡ ff8c5b63-0fd5-4242-9f7c-b3a283070672
+my_function(2,3,3,4,5,6; α=0.7, γ=2*one(a))
+
 # ╔═╡ d3acb613-7737-46ce-b1fd-801adc2454b9
 md"""
 # *Multiple dispatch*
@@ -220,6 +291,12 @@ Debido a esta característica, muchas funciones tienen diferentes **métodos**. 
 
 # ╔═╡ 37cdd64d-a037-483f-9837-48e3d119e2aa
 sum
+
+# ╔═╡ b7bbfc6a-6ddd-4efe-b39e-3f7002d033d8
+my_function 
+
+# ╔═╡ 36df6830-343d-4575-a7d7-f17d7b08fb57
+# methods(my_function)
 
 # ╔═╡ 2ecb0e73-38e7-45a4-90a5-d2b31cf35481
 md"""
@@ -321,6 +398,7 @@ begin
 	# Extendiendo la funcionalidad específica
 	area(t::Triangle) = t.base * t.height/ 2
 	# ¿ cómo podemos definir el método whatami para un triángulo?
+	whatami(::Triangle) = "Triangle"
 end
 
 # ╔═╡ 4482a144-4df3-4742-a089-179b362c1e99
@@ -542,10 +620,20 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═720e0368-c3f7-4ff3-98a6-e8711b62a1fa
 # ╟─0daf64ee-347e-4637-9410-755ca6526f60
 # ╠═8952fc5d-7529-41bc-9723-249895d35271
+# ╠═4938ea83-da73-4f05-82a6-26252838dc2b
 # ╠═ab2b0667-0d25-46cc-95b9-ba5830ce73e1
+# ╟─94afa92e-bb21-47cf-979a-cbca1323cdb0
+# ╠═3bdc3d06-3c18-48ee-916a-2df7b06ba58c
+# ╠═e90dfc17-c9c5-4d4a-8e27-8528d167d32e
+# ╠═8a34a637-577d-43fa-b6bc-18e2e24213e1
+# ╠═9c75d276-6186-4ac3-9754-80ac949f41b0
+# ╠═d84faa8f-809a-40af-9ebe-89d7189f967a
+# ╠═893f2d2e-53f3-4182-a93d-f1f55d802e25
 # ╟─8b53b3de-4c67-4d92-a41a-345a196b9555
 # ╠═278e9ae3-4e3a-4b73-8a7c-39e56267380a
 # ╠═426405ba-27c2-4853-b7ae-33ebeb0f8d22
+# ╠═b5f1229b-ecf4-432f-8e90-b6ed0cef7b62
+# ╠═4b7b9ee4-9e83-4d37-b3ff-85454980cc12
 # ╠═a929b78a-290a-4a87-9c0e-601faf554b53
 # ╟─5a62a83c-9f18-42ed-b6a0-6f50b1afb6bf
 # ╟─a31b479b-0f16-4892-89d1-231b410041dc
@@ -555,18 +643,28 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═b833aff9-e049-426f-b629-1498d5665415
 # ╟─ddff967b-4ded-4cc9-ad8d-7ba6ecf5b943
 # ╠═c20bc6d0-9d2d-4b01-a15f-77643fee97d1
+# ╠═118229f5-61ca-43a6-93cb-e268bf6fd9f7
+# ╠═6ae88f84-de7e-469c-9eb3-305976515f70
 # ╠═b46638be-b4b1-4d12-a179-ff31974cfa0f
+# ╠═d85e05b4-3623-4f87-9c0c-af98c0aa5e52
 # ╠═b778dc21-524d-4f24-a683-47cabd6312d4
 # ╟─53d6470a-13be-4a59-819a-c668e6f9f3c2
 # ╠═58f8f2f7-b0f5-4946-a18a-2066c9cd6c21
 # ╠═0f59173e-1348-4b32-a4a5-2e15c9a01650
 # ╟─d5ff8cb9-55e8-4642-9079-b76dfd120dd9
 # ╠═45ae1da9-67c2-4140-b799-83b07934eb05
+# ╠═e00fe757-5926-4283-978b-9a17d5387fb5
+# ╠═c6b7baf2-f61f-4d60-8f1f-d204a8fb4a58
 # ╟─b6f550b2-f65d-4023-940b-d18e39fe8eaf
 # ╠═2fb5901d-50c6-49f1-864c-05812826e7b3
+# ╠═2358555d-1cd1-46dc-b039-f77528c2dd5f
+# ╠═8b123de2-2cd7-4652-848c-9bd895d29566
+# ╠═ff8c5b63-0fd5-4242-9f7c-b3a283070672
 # ╟─d3acb613-7737-46ce-b1fd-801adc2454b9
 # ╠═25b0b4d3-cffb-4441-8627-513b9a080767
 # ╠═37cdd64d-a037-483f-9837-48e3d119e2aa
+# ╠═b7bbfc6a-6ddd-4efe-b39e-3f7002d033d8
+# ╠═36df6830-343d-4575-a7d7-f17d7b08fb57
 # ╟─2ecb0e73-38e7-45a4-90a5-d2b31cf35481
 # ╠═9dd6990c-d347-4013-8466-767e2c3b2624
 # ╟─ce2b298b-f3f0-4c16-9763-dba6e6eff31e
